@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member Login</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f1f5f9;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-container {
+      width: 90%;
+      max-width: 420px;
+      background: white;
+      padding: 35px;
+      border-radius: 12px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.12);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .logo h1 {
+      color: #166534;
+      font-size: 28px;
+    }
+
+    .logo p {
+      color: #666;
+      margin-top: 8px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #166534;
+    }
+
+    .options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .remember input {
+      width: auto;
+      margin: 0;
+    }
+
+    .forgot {
+      color: #166534;
+      text-decoration: none;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 7px;
+      background: #166534;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .login-btn:hover {
+      background: #14532d;
+    }
+
+    .register {
+      text-align: center;
+      margin-top: 22px;
+      color: #555;
+    }
+
+    .register a {
+      color: #166534;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    #message {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-container">
+
+    <div class="logo">
+      <h1>RetailConnect</h1>
+      <p>Member Login</p>
+    </div>
+
+    <form id="loginForm">
+
+      <label for="login">Email or Phone Number</label>
+      <input
+        type="text"
+        id="login"
+        placeholder="Enter email or phone number"
+        required
+      >
+
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter your password"
+        required
+      >
+
+      <div class="options">
+
+        <label class="remember">
+          <input type="checkbox" id="remember">
+          Remember me
+        </label>
+
+        <a href="#" class="forgot">Forgot Password?</a>
+
+      </div>
+
+      <button type="submit" class="login-btn">
+        Login
+      </button>
+
+      <p id="message"></p>
+
+    </form>
+
+    <div class="register">
+      Don't have an account?
+      <a href="register.html">Register as a Member</a>
+    </div>
+
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+      const login = document.getElementById("login").value;
+      const password = document.getElementById("password").value;
+      const message = document.getElementById("message");
+
+      if (login === "" || password === "") {
+        message.style.color = "red";
+        message.textContent = "Please enter your login details.";
+        return;
+      }
+
+      message.style.color = "#166534";
+      message.textContent = "Login submitted successfully.";
+
+      // Real authentication will be connected to your backend later.
+    });
+  </script>
+
+</body>
+</html>
