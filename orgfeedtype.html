@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FeedConnect - Feed Types</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f7f4;
+    color:#222;
+}
+
+/* HEADER */
+
+header{
+    height:80px;
+    background:#176d38;
+    display:flex;
+    align-items:center;
+    padding:0 25px;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:bold;
+}
+
+.feed{
+    color:white;
+}
+
+.connect{
+    color:#ffd43b;
+}
+
+.chicken{
+    font-size:28px;
+    margin-left:5px;
+}
+
+
+/* CONTAINER */
+
+.container{
+    max-width:1000px;
+    margin:30px auto;
+    padding:0 20px;
+}
+
+
+/* TITLE */
+
+.title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.title h1{
+    color:#176d38;
+    font-size:34px;
+}
+
+.title p{
+    color:#666;
+    margin-top:10px;
+}
+
+
+/* SEARCH */
+
+.search{
+    margin-bottom:25px;
+}
+
+.search input{
+    width:100%;
+    padding:15px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:17px;
+}
+
+.search input:focus{
+    outline:none;
+    border-color:#176d38;
+}
+
+
+/* FEED GRID */
+
+.feed-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+
+/* FEED CARD */
+
+.feed-card{
+    background:white;
+    border-radius:15px;
+    padding:22px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    transition:.2s;
+}
+
+.feed-card:hover{
+    transform:translateY(-3px);
+}
+
+.feed-icon{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:#e5f4e9;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:34px;
+    margin-bottom:15px;
+}
+
+.feed-card h2{
+    color:#176d38;
+    font-size:21px;
+    margin-bottom:10px;
+}
+
+.feed-card p{
+    color:#666;
+    line-height:1.5;
+    font-size:14px;
+}
+
+
+/* PRICE */
+
+.price{
+    margin-top:15px;
+    font-size:18px;
+    font-weight:bold;
+    color:#222;
+}
+
+.price span{
+    color:#176d38;
+}
+
+
+/* BUTTON */
+
+.view-btn{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:8px;
+    background:#ffd23f;
+    color:#111;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.view-btn:hover{
+    background:#ffdf67;
+}
+
+
+/* MESSAGE */
+
+.message{
+    display:none;
+    margin-top:25px;
+    background:#e5f7eb;
+    color:#176d38;
+    padding:18px;
+    border-radius:10px;
+    text-align:center;
+    font-weight:bold;
+}
+
+
+/* MOBILE */
+
+@media(max-width:750px){
+
+    .feed-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:500px){
+
+    .logo{
+        font-size:26px;
+    }
+
+    .title h1{
+        font-size:28px;
+    }
+
+    .feed-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+
+        <span class="feed">Feed</span><span class="connect">Connect</span>
+
+        <span class="chicken">🐔</span>
+
+    </div>
+
+</header>
+
+
+
+<div class="container">
+
+
+    <!-- TITLE -->
+
+    <div class="title">
+
+        <h1> Prices of chicken feed </h1>
+
+        <p>
+            Current prices of chicken feed.
+        </p>
+
+    </div>
+
+    <!-- FEED TYPES -->
+
+    <div class="feed-grid" id="feedGrid">
+
+
+        <!-- 1 -->
+
+        <div class="feed-card">
+
+            <div class="feed-icon">
+                🐣
+            </div>
+
+            <h2>Broiler Starter</h2>
+
+            <p>
+                Feed designed for young broiler chickens
+                during their early growth stage.
+            </p>
+
+            <div class="price">
+                Price: <span>₦20,000 / bag</span>
+            </div>
+
+            <button
+                class="view-btn"
+                onclick="selectFeed('Broiler Starter')"
+            >
+                current price
+            </button>
+
+        </div>
+
+
+
+        <!-- 2 -->
+
+        <div class="feed-card">
+
+            <div class="feed-icon">
+                🐔
+            </div>
+
+            <h2>Broiler Finisher</h2>
+
+            <p>
+                Feed formulated for broilers during the
+                finishing stage before market.
+            </p>
+
+            <div class="price">
+                Price: <span>₦21,500 / bag</span>
+            </div>
+
+            <button
+                class="view-btn"
+                onclick="selectFeed('Broiler Finisher')"
+            >
+                current price
+            </button>
+
+        </div>
+
+
+
+        <!-- 3 -->
+
+        <div class="feed-card">
+
+            <div class="feed-icon">
+                🥚
+            </div>
+
+            <h2>Layer Starter</h2>
+
+            <p>
+                Feed for young layer chickens preparing
+                for the laying stage.
+            </p>
+
+            <div class="price">
+                Price: <span>₦19,500 / bag</span>
+            </div>
+
+            <button
+                class="view-btn"
+                onclick="selectFeed('Layer Starter')"
+            >
+                current price
+            </button>
+
+        </div>
+
+
+
+        <!-- 4 -->
+
+        <div class="feed-card">
+
+            <div class="feed-icon">
+                🥚
+            </div>
+
+            <h2>Layer Grower</h2>
+
+            <p>
+                Balanced feed for growing layer birds
+                before egg production.
+            </p>
+
+            <div class="price">
+                Price: <span>₦19,000 / bag</span>
+            </div>
+
+            <button
+                class="view-btn"
+                onclick="selectFeed('Layer Grower')"
+            >
+                current price
+            </button>
+
+        </div>
+
+
+
+        <!-- 5 -->
+
+        <div class="feed-card">
+
+            <div class="feed-icon">
+                🥚
+            </div>
+
+            <h2>Layer Mash</h2>
+
+            <p>
+                Feed designed for laying birds to support
+                healthy egg production.
+            </p>
+
+            <div class="price">
+                Price: <span>₦20,500 / bag</span>
+            </div>
+
+            <button
+                class="view-btn"
+                onclick="selectFeed('Layer Mash')"
+            >
+                current price
+            </button>
+
+        </div>
+
+
+
+        <!-- 6 -->
+
+        <div class="feed-card">
+
+            <div class="feed-icon">
+                🐥
+            </div>
+
+            <h2>Chick Starter</h2>
+
+            <p>
+                Starter feed for chicks during their
+                first weeks of growth.
+            </p>
+
+            <div class="price">
+                Price: <span>₦19,800 / bag</span>
+            </div>
+
+            <button
+                class="view-btn"
+                onclick="selectFeed('Chick Starter')"
+            >
+                current price
+            </button>
+
+        </div>
+
+
+
+        <!-- 7 -->
+
+        <div class="feed-card">
+
+            <div class="feed-icon">
+                🌾
+            </div>
+
+            <h2>Grower Feed</h2>
+
+            <p>
+                Feed for chickens in the growing stage
+                before maturity.
+            </p>
+
+            <div class="price">
+                Price: <span>₦19,500 / bag</span>
+            </div>
+
+            <button
+                class="view-btn"
+                onclick="selectFeed('Grower Feed')"
+            >
+                current price
+            </button>
+
+        </div>
+
+
+
+        <!-- 8 -->
+
+        <div class="feed-card">
+
+            <div class="feed-icon">
+                🌾
+            </div>
+
+            <h2>Developer Feed</h2>
+
+            <p>
+                Feed formulated to support healthy
+                development of poultry birds.
+            </p>
+
+            <div class="price">
+                Price: <span>₦20,000 / bag</span>
+            </div>
+
+            <button
+                class="view-btn"
+                onclick="selectFeed('Developer Feed')"
+            >
+                current price
+            </button>
+
+        </div>
+
+
+
+        <!-- 9 -->
+
+        <div class="feed-card">
+
+            <div class="feed-icon">
+                🐔
+            </div>
+
+            <h2>Breeder Feed</h2>
+
+            <p>
+                Feed formulated for breeder chickens
+                and reproductive performance.
+            </p>
+
+            <div class="price">
+                Price: <span>₦22,000 / bag</span>
+            </div>
+
+            <button
+                class="view-btn"
+                onclick="selectFeed('Breeder Feed')"
+            >
+                current price
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- MESSAGE -->
+
+    <div
+        class="message"
+        id="message"
+    ></div>
+
+
+</div>
+
+
+
+<script>
+
+/* SELECT FEED */
+
+function selectFeed(feedName){
+
+    let message =
+        document.getElementById("message");
+
+    message.style.display = "block";
+
+    message.innerHTML =
+        "✓ You selected <strong>" +
+        feedName +
+        "</strong>. The next step can show available sellers and group-buying options.";
+
+}
+
+
+/* SEARCH */
+
+function searchFeed(){
+
+    let search =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+    let cards =
+        document
+        .querySelectorAll(".feed-card");
+
+
+    cards.forEach(function(card){
+
+        let name =
+            card
+            .querySelector("h2")
+            .innerText
+            .toLowerCase();
+
+
+        if(name.includes(search)){
+
+            card.style.display = "";
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+
+</body>
+</html>

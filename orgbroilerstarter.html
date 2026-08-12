@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FeedConnect - Purchase Meeting</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f7f4;
+    color:#222;
+}
+
+/* HEADER */
+
+header{
+    height:80px;
+    background:#176d38;
+    display:flex;
+    align-items:center;
+    padding:0 25px;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:bold;
+}
+
+.feed{
+    color:white;
+}
+
+.connect{
+    color:#ffd43b;
+}
+
+.chicken{
+    font-size:28px;
+    margin-left:5px;
+}
+
+
+/* CONTAINER */
+
+.container{
+    max-width:900px;
+    margin:30px auto;
+    padding:0 20px;
+}
+
+
+/* TITLE */
+
+.title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.title h1{
+    color:#176d38;
+    font-size:32px;
+}
+
+.title p{
+    color:#666;
+    margin-top:8px;
+}
+
+
+/* MAIN MEETING CARD */
+
+.meeting-card{
+    background:white;
+    border-radius:15px;
+    padding:28px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    margin-bottom:20px;
+}
+
+.meeting-card h2{
+    color:#176d38;
+    margin-bottom:20px;
+}
+
+
+/* DATE TIME */
+
+.date-time{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.date-box,
+.time-box{
+    background:#176d38;
+    color:white;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.date-box .icon,
+.time-box .icon{
+    font-size:35px;
+}
+
+.date-box h3,
+.time-box h3{
+    margin-top:8px;
+    font-size:25px;
+}
+
+.date-box p,
+.time-box p{
+    margin-top:7px;
+}
+
+
+/* DETAILS */
+
+.detail{
+    display:flex;
+    justify-content:space-between;
+    padding:14px 0;
+    border-bottom:1px solid #eee;
+}
+
+.detail:last-child{
+    border-bottom:none;
+}
+
+.label{
+    color:#666;
+}
+
+.value{
+    font-weight:bold;
+    text-align:right;
+}
+
+
+/* STATUS */
+
+.status{
+    display:inline-block;
+    background:#dff3e6;
+    color:#176d38;
+    padding:7px 14px;
+    border-radius:20px;
+    font-weight:bold;
+    font-size:13px;
+}
+
+
+/* PURCHASE SUMMARY */
+
+.summary{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.summary-box{
+    background:#f1f7f3;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+}
+
+.summary-box h3{
+    font-size:14px;
+    color:#666;
+}
+
+.summary-box strong{
+    display:block;
+    color:#176d38;
+    font-size:23px;
+    margin-top:8px;
+}
+
+
+/* MEMBERS */
+
+.members{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    padding:13px;
+    border-bottom:1px solid #eee;
+    text-align:left;
+}
+
+th{
+    background:#176d38;
+    color:white;
+}
+
+.present{
+    color:#176d38;
+    font-weight:bold;
+}
+
+.pending{
+    color:#c48a00;
+    font-weight:bold;
+}
+
+
+/* BUTTONS */
+
+.buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-top:20px;
+}
+
+button{
+    padding:16px;
+    border:none;
+    border-radius:8px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.confirm{
+    background:#ffd23f;
+}
+
+.confirm:hover{
+    background:#ffdf67;
+}
+
+.map{
+    background:#176d38;
+    color:white;
+}
+
+.map:hover{
+    background:#0f552a;
+}
+
+
+/* COUNTDOWN */
+
+.countdown{
+    background:#fff8d8;
+    border-left:5px solid #ffd23f;
+    padding:18px;
+    border-radius:8px;
+    margin-top:20px;
+    text-align:center;
+}
+
+.countdown strong{
+    color:#176d38;
+    font-size:22px;
+}
+
+
+/* MESSAGE */
+
+.message{
+    display:none;
+    margin-top:15px;
+    padding:15px;
+    background:#e5f7eb;
+    color:#176d38;
+    border-radius:8px;
+    text-align:center;
+    font-weight:bold;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .logo{
+        font-size:26px;
+    }
+
+    .container{
+        margin-top:20px;
+    }
+
+    .title h1{
+        font-size:27px;
+    }
+
+    .date-time{
+        grid-template-columns:1fr;
+    }
+
+    .summary{
+        grid-template-columns:1fr;
+    }
+
+    .buttons{
+        grid-template-columns:1fr;
+    }
+
+    .detail{
+        gap:15px;
+    }
+
+    .value{
+        text-align:right;
+    }
+
+}
+</style>
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+
+        <span class="feed">Feed</span><span class="connect">Connect</span>
+
+        <span class="chicken">🐔</span>
+
+    </div>
+
+</header>
+
+
+
+<div class="container">
+
+
+    <!-- TITLE -->
+
+    <div class="title">
+
+        <h1>Date and time of Meeting</h1>
+
+        <p>
+            All group head meet at the feed company to make payment.
+        </p>
+
+    </div>
+
+
+
+    <!-- MEETING -->
+
+    <div class="meeting-card">
+
+        <h2> Meeting Information</h2>
+
+
+        <div class="date-time">
+
+            <div class="date-box">
+
+                <div class="icon"></div>
+
+                <h3>20 August 2026</h3>
+
+                <p>Thursday</p>
+
+            </div>
+
+
+            <div class="time-box">
+
+                <div class="icon">⏰</div>
+
+                <h3>10:00 AM</h3>
+
+                <p>Meet at the company</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="detail">
+
+            <span class="label">Feed Group</span>
+
+            <span class="value">
+                Broiler Starter Feed
+            </span>
+
+        </div>
+
+
+        <div class="detail">
+
+            <span class="label">Feed Company olam agric</span>

@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FeedConnect - Feed Collection</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f7f4;
+    color:#222;
+}
+
+/* HEADER */
+
+header{
+    height:80px;
+    background:#176d38;
+    display:flex;
+    align-items:center;
+    padding:0 25px;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:bold;
+}
+
+.feed{
+    color:white;
+}
+
+.connect{
+    color:#ffd43b;
+}
+
+.chicken{
+    font-size:28px;
+    margin-left:5px;
+}
+
+
+/* CONTAINER */
+
+.container{
+    max-width:900px;
+    margin:30px auto;
+    padding:0 20px;
+}
+
+
+/* TITLE */
+
+.title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.title h1{
+    color:#176d38;
+    font-size:32px;
+}
+
+.title p{
+    color:#666;
+    margin-top:8px;
+}
+
+
+/* COLLECTION CARD */
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:28px;
+    margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.card h2{
+    color:#176d38;
+    margin-bottom:20px;
+}
+
+
+/* LOCATION */
+
+.location{
+    background:#176d38;
+    color:white;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.location .icon{
+    font-size:45px;
+}
+
+.location h2{
+    color:white;
+    margin:10px 0;
+}
+
+.location p{
+    font-size:17px;
+    line-height:1.6;
+}
+
+
+/* DATE TIME */
+
+.date-time{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-top:20px;
+}
+
+.date-box,
+.time-box{
+    background:#f1f7f3;
+    padding:22px;
+    border-radius:10px;
+    text-align:center;
+}
+
+.date-box strong,
+.time-box strong{
+    display:block;
+    color:#176d38;
+    font-size:22px;
+    margin-top:8px;
+}
+
+
+/* DETAILS */
+
+.detail{
+    display:flex;
+    justify-content:space-between;
+    padding:14px 0;
+    border-bottom:1px solid #eee;
+}
+
+.detail:last-child{
+    border-bottom:none;
+}
+
+.label{
+    color:#666;
+}
+
+.value{
+    font-weight:bold;
+    text-align:right;
+}
+
+
+/* MEMBER COLLECTION */
+
+.member-box{
+    background:#f1f7f3;
+    padding:20px;
+    border-radius:10px;
+}
+
+.member-box h3{
+    color:#176d38;
+    margin-bottom:15px;
+}
+
+.member-info{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+}
+
+
+/* STATUS */
+
+.status{
+    display:inline-block;
+    padding:7px 13px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.ready{
+    background:#dff3e6;
+    color:#176d38;
+}
+
+
+/* MEMBERS TABLE */
+
+.table-container{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    padding:13px;
+    border-bottom:1px solid #eee;
+    text-align:left;
+}
+
+th{
+    background:#176d38;
+    color:white;
+}
+
+
+/* BUTTONS */
+
+.buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-top:20px;
+}
+
+button{
+    padding:16px;
+    border:none;
+    border-radius:8px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.map-btn{
+    background:#176d38;
+    color:white;
+}
+
+.confirm-btn{
+    background:#ffd23f;
+    color:#111;
+}
+
+
+/* MESSAGE */
+
+.message{
+    display:none;
+    background:#e5f7eb;
+    color:#176d38;
+    padding:15px;
+    border-radius:8px;
+    margin-top:15px;
+    text-align:center;
+    font-weight:bold;
+}
+
+
+/* IMPORTANT NOTICE */
+
+.notice{
+    background:#fff8d8;
+    border-left:5px solid #ffd23f;
+    padding:18px;
+    line-height:1.6;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .logo{
+        font-size:26px;
+    }
+
+    .title h1{
+        font-size:27px;
+    }
+
+    .date-time{
+        grid-template-columns:1fr;
+    }
+
+    .buttons{
+        grid-template-columns:1fr;
+    }
+
+    .detail{
+        gap:15px;
+    }
+
+    .value{
+        text-align:right;
+    }
+
+    th,
+    td{
+        font-size:13px;
+        padding:10px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+
+        <span class="feed">Feed</span><span class="connect">Connect</span>
+
+        <span class="chicken">🐔</span>
+
+    </div>
+
+</header>
+
+
+
+<div class="container">
+
+
+    <!-- TITLE -->
+
+    <div class="title">
+
+        <h1>Feed Collection Date</h1>
+
+        <p>
+            Meet at the collection point to collect your purchased feed.
+        </p>
+
+    </div>
+
+
+
+    <!-- COLLECTION LOCATION -->
+
+    <div class="card">
+
+        <div class="location">
+
+            <div class="icon">📍</div>
+
+            <h2>Feed Collection Point</h2>
+
+            <p>
+                GreenFarm Feed Distribution Centre
+            </p>
+
+            <p>
+                Kaduna–Abuja Road, Kaduna
+            </p>
+
+        </div>
+
+
+        <div class="date-time">
+
+            <div class="date-box">
+
+                📅
+
+                <strong>
+                    25 August 2026
+                </strong>
+
+                <p>
+                    Tuesday
+                </p>
+
+            </div>
+
+
+            <div class="time-box">
+
+                ⏰
+
+                <strong>
+                    9:00 AM
+                </strong>
+
+                <p>
+                    Collection begins
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ORDER INFORMATION -->
+
+    <div class="card">
+
+        <h2>📦 Order Information</h2>
+
+
+        <div class="detail">
+
+            <span class="label">
+                Feed Type
+            </span>
+
+            <span class="value">
+                Broiler Starter Feed
+            </span>
+
+        </div>
+
+
+        <div class="detail">
+
+            <span class="label">
+                Total Bags
+            </span>
+
+            <span class="value">
+                500 Bags
+            </span>
+
+        </div>
+
+
+        <div class="detail">
+
+            <span class="label">
+                Order Number
+            </span>
+
+            <span class="value">
+                FC-2026-0085
+            </span>
+
+        </div>
+
+
+        <div class="detail">
+
+            <span class="label">
+                Collection Status
+            </span>
+
+            <span class="status ready">
+                READY FOR COLLECTION
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- MY COLLECTION -->
+
+    <div class="card">
+
+        <h2>👤 My Collection</h2>
+
+
+        <div class="member-box">
+
+            <h3>Member Information</h3>
+
+
+            <div class="member-info">
+
+                <span>Name</span>
+
+                <strong>
+                    Ahmed
+                </strong>
+
+            </div>
+
+
+            <div class="member-info">
+
+                <span>Contribution</span>
+
+                <strong>
+                    ₦500,000
+                </strong>
+
+            </div>
+
+
+            <div class="member-info">
+
+                <span>Feed Bags</span>
+
+                <strong>
+                    25 Bags
+                </strong>
+
+            </div>
+
+
+            <div class="member-info">
+
+                <span>Collection Status</span>
+
+                <strong style="color:#176d38;">
+                    READY
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- MEMBERS -->
+
+    <div class="card">
+
+        <h2>👥 Group Collection Status</h2>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>#</th>
+                        <th>Member</th>
+                        <th>Bags</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <tr>
+
+                        <td>1</td>
+
+                        <td>Ahmed</td>
+
+                        <td>25</td>
+
+                        <td>
+                            <span class="status ready">
+                                Ready
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>2</td>
+
+                        <td>David</td>
+
+                        <td>20</td>
+
+                        <td>
+                            <span class="status ready">
+                                Ready
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>3</td>
+
+                        <td>Ibrahim</td>
+
+                        <td>17</td>
+
+                        <td>
+                            <span class="status ready">
+                                Ready
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>4</td>
+
+                        <td>Joseph</td>
+
+                        <td>15</td>
+
+                        <td>
+                            <span class="status ready">
+                                Ready
+                            </span>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- BUTTONS -->
+
+    <div class="card">
+
+        <div class="buttons">
+
+            <button
+                class="map-btn"
+                onclick="showLocation()"
+            >
+                📍 View Location
+            </button>
+
+
+            <button
+                class="confirm-btn"
+                onclick="confirmCollection()"
+            >
+                ✓ Confirm Collection
+            </button>
+
+        </div>
+
+
+        <div
+            class="message"
+            id="message"
+        ></div>
+
+    </div>
+
+
+
+    <!-- NOTICE -->
+
+    <div class="notice">
+
+        <strong>Important:</strong><br>
+
+        Please arrive at the collection point on time.
+        Bring your order number and identification.
+        Your feed will be released after your collection
+        is verified by the group coordinator.
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+function showLocation(){
+
+    let message =
+        document.getElementById("message");
+
+    message.style.display = "block";
+
+    message.innerHTML =
+        "📍 Collection point: GreenFarm Feed Distribution Centre, Kaduna–Abuja Road, Kaduna. A real version can open the location in Google Maps.";
+
+}
+
+
+function confirmCollection(){
+
+    let message =
+        document.getElementById("message");
+
+    message.style.display = "block";
+
+    message.innerHTML =
+        "✓ Your collection has been confirmed. Your 25 bags are ready for pickup on 25 August 2026 at 9:00 AM.";
+
+}
+
+</script>
+
+
+</body>
+</html>
