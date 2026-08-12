@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FeedConnect - Chicken Feed Group Buying</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f5f7f4;
+    color:#222;
+}
+
+header{
+    background:#176b3a;
+    color:white;
+    padding:15px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#ffd447;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:18px;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:#ffd447;
+}
+
+.hero{
+    background:linear-gradient(135deg,#176b3a,#2d934f);
+    color:white;
+    padding:70px 5%;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:42px;
+    margin-bottom:18px;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    font-size:18px;
+    line-height:1.6;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:25px;
+    padding:13px 22px;
+    border:none;
+    border-radius:7px;
+    background:#ffd447;
+    color:#222;
+    font-weight:bold;
+    cursor:pointer;
+    text-decoration:none;
+}
+
+.btn:hover{
+    background:#fff;
+}
+
+section{
+    padding:55px 5%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.section-title h2{
+    color:#176b3a;
+    font-size:30px;
+}
+
+.section-title p{
+    margin-top:8px;
+    color:#666;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.feature{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.feature .icon{
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+.feature h3{
+    margin-bottom:10px;
+    color:#176b3a;
+}
+
+.groups{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:22px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:22px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.card h3{
+    color:#176b3a;
+    margin-bottom:10px;
+}
+
+.info{
+    margin:8px 0;
+    color:#555;
+}
+
+.progress{
+    width:100%;
+    height:12px;
+    background:#ddd;
+    border-radius:20px;
+    overflow:hidden;
+    margin:12px 0;
+}
+
+.progress-bar{
+    height:100%;
+    background:#176b3a;
+}
+
+.amount{
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+}
+
+.small-btn{
+    width:100%;
+    padding:11px;
+    border:none;
+    border-radius:6px;
+    background:#176b3a;
+    color:white;
+    cursor:pointer;
+    margin-top:12px;
+}
+
+.small-btn:hover{
+    background:#0f4e2a;
+}
+
+.form-container{
+    max-width:700px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:7px;
+    font-weight:bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    outline:none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:#176b3a;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.stat{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    border-left:5px solid #176b3a;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.stat h3{
+    color:#666;
+    font-size:14px;
+}
+
+.stat strong{
+    display:block;
+    font-size:27px;
+    margin-top:10px;
+    color:#176b3a;
+}
+
+.seller-table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    margin-top:20px;
+}
+
+.seller-table th,
+.seller-table td{
+    padding:14px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+}
+
+.seller-table th{
+    background:#176b3a;
+    color:white;
+}
+
+footer{
+    background:#123d26;
+    color:white;
+    text-align:center;
+    padding:30px 5%;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    justify-content:center;
+    align-items:center;
+    z-index:2000;
+}
+
+.modal-box{
+    background:white;
+    padding:30px;
+    width:90%;
+    max-width:450px;
+    border-radius:12px;
+}
+
+.close{
+    float:right;
+    font-size:24px;
+    cursor:pointer;
+}
+
+.notice{
+    background:#fff8d8;
+    border-left:5px solid #ffd447;
+    padding:15px;
+    margin-top:20px;
+    border-radius:5px;
+}
+
+@media(max-width:700px){
+    nav{
+        display:none;
+    }
+
+    .hero h1{
+        font-size:31px;
+    }
+
+    .seller-table{
+        font-size:13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Feed<span>Connect</span> 🐔</div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#groups">Buy Feed</a>
+        <a href="#seller">Sellers</a>
+        <a href="#create">Create Group</a>
+        <a href="#dashboard">Dashboard</a>
+    </nav>
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+    <h1>Let Buy Chicken Feed Together</h1>
+
+    <p>FEED CONNECT<p/>
+        <p> (we connects chicken-feed sellers)<p/>
+
+            <p> Join our group let purchase chicken feed at a lower price.
+    we will buy 400 to 500 bag directly from the company
+    </p>
+
+    <a href="orgregistration.html" class="btn"> Registration </a>
+            <p>  <a href="orgfeedtype.html" class="btn">Company price of chicken feed</a>
+</section>
+        </p>
+
+<!-- HOW IT WORKS -->
+
+<section>
+    <div class="section-title">
+        <h2>How FeedConnect Works</h2>
+        <p>Three simple steps</p>
+    </div>
+
+    <div class="features">
+
+        <div class="feature">
+            <div class="icon">👥</div>
+            <a href="orggroup.html" class="btn">1.Date of puchasing chicken feed</a>
+                 
+            <p>
+                choose the type of chicken feed you want to buy.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="icon">💰</div>
+     <a href="orgdate.html" class="btn">2. MEETING DATE AND TIME</a>
+           
+            <p>
+                The day we will all go to the company and pay for the feed.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="icon">🐔</div>
+            <h3><ahref="orgcollection.html" class="btn">FEED COLLECTION</a></h3>
+       
+            <p>
+                where you will receive your feed.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="icon">🏪</div>
+            <h3> <h3><ahref="orgcollection.html" class="btn">Loan</a></h3>  
+            
+                You can get a loan if you are in our organisation and save with us.
+            </h3>
+
+
+ 
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>FeedConnect 🐔</h3>
+
+    <p style="margin-top:10px;">
+        Connecting poultry farmers with feed sellers through group buying.
+    </p>
+
+    <p style="margin-top:15px;">
+        © 2026 FeedConnect. All rights reserved.
+    </p>
+
+</footer>
+
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+let selectedGroup = "";
+
+let groupsJoined = 0;
+let totalContribution = 0;
+
+
+/* OPEN CONTRIBUTION */
+
+function openContribution(groupName){
+
+    selectedGroup = groupName;
+
+    document.getElementById("modalTitle").innerText =
+        "Join " + groupName;
+
+    document.getElementById("contributionModal").style.display =
+        "flex";
+}
+
+
+/* CLOSE MODAL */
+
+function closeModal(){
+
+    document.getElementById("contributionModal").style.display =
+        "none";
+
+    document.getElementById("contributionMessage").innerText = "";
+}
+
+
+/* MAKE CONTRIBUTION */
+
+function makeContribution(){
+
+    let amount =
+        Number(document.getElementById("contributionAmount").value);
+
+    if(amount <= 0 || isNaN(amount)){
+
+        document.getElementById("contributionMessage").innerText =
+            "Please enter a valid amount.";
+
+        return;
+    }
+
+    groupsJoined++;
+
+    totalContribution += amount;
+
+    document.getElementById("groupsJoined").innerText =
+        groupsJoined;
+
+    document.getElementById("totalContribution").innerText =
+        "₦" + totalContribution.toLocaleString();
+
+    document.getElementById("contributionMessage").innerText =
+        "Contribution recorded successfully for " +
+        selectedGroup +
+        ". This is only a demo.";
+
+    document.getElementById("contributionAmount").value = "";
+}
+
+
+/* CREATE GROUP */
+
+function createGroup(event){
+
+    event.preventDefault();
+
+    let name =
+        document.getElementById("creatorName").value;
+
+    let feed =
+        document.getElementById("feedType").value;
+
+    let location =
+        document.getElementById("location").value;
+
+    let target =
+        Number(document.getElementById("targetAmount").value);
+
+    let contribution =
+        Number(document.getElementById("contribution").value);
+
+    let estimatedPeople =
+        Math.ceil(target / contribution);
+
+    document.getElementById("groupMessage").innerHTML =
+
+        "<div class='notice'>" +
+
+        "<strong>Group Created Successfully!</strong><br><br>" +
+
+        "Organizer: " + name + "<br>" +
+        "Feed: " + feed + "<br>" +
+        "Location: " + location + "<br>" +
+        "Target: ₦" + target.toLocaleString() + "<br>" +
+        "Suggested contribution: ₦" +
+        contribution.toLocaleString() + "<br>" +
+        "Estimated participants: " +
+        estimatedPeople +
+
+        "<br><br>" +
+
+        "Your group is now displayed as a prototype. " +
+        "A real version would save this information in a database." +
+
+        "</div>";
+
+}
+
+
+/* CONTACT SELLER */
+
+function contactSeller(seller){
+
+    alert(
+        "You selected " +
+        seller +
+        ".\n\n" +
+        "A real version could open a messaging system " +
+        "between you and the seller."
+    );
+}
+
+
+/* CLOSE MODAL WHEN CLICKING OUTSIDE */
+
+window.onclick = function(event){
+
+    let modal =
+        document.getElementById("contributionModal");
+
+    if(event.target === modal){
+
+        closeModal();
+
+    }
+
+};
+
+</script>
+
+</body>
+</html>
